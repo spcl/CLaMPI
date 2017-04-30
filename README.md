@@ -9,24 +9,28 @@ All published work using the simulator should cite [1].
 [1] Di Girolamo, Salvatore, Flavio Vella, and Torsten Hoefler. "Transparent Caching for RMA Systems." 
 (https://spcl.inf.ethz.ch/Publications/.pdf/CLaMPI.pdf)
 
-=====================================================================================================================
-Compile:
+##Compile
+```
+```
 
-autoreconf -if
-
-Piz Daint: 
+###On Piz Daint
+``` 
     module switch PrgEnv-cray PrgEnv-gnu
     export CRAYPE_LINK_TYPE="dynamic"
+    autoreconf -if
     CC=cc ./configure --prefix=$(pwd)/build/ --with-fompi=<fompi_path> --with-dmapp=/opt/cray/dmapp/default/include --enable-adaptive --with-liblsb=<liblsb with MPI path>
     make
     make install
-
-x86:
+```
+###On x86
+```
+    autoreconf -if
     CC=mpicc ./configure --prefix=$(pwd)/build/ --enable-adaptive --with-liblsb=<liblsb with MPI path>
     make
     make install
+```
 
-Notes:
+###Notes:
     - libLSB is optional in configure. If not specified, the perf_hash test will not be compiled
-    - --enable-adaptive enables the adaptive scheme.
+    - `--enable-adaptive` enables the adaptive scheme
 
