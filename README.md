@@ -11,6 +11,14 @@ All published work using CLaMPI should cite [1].
 ## Compile
 
 
+### On x86
+```
+    autoreconf -if
+    CC=mpicc ./configure --prefix=$(pwd)/build/ --enable-adaptive --with-liblsb=<liblsb with MPI path>
+    make
+    make install
+```
+
 
 ### On Piz Daint
 ``` 
@@ -22,17 +30,10 @@ All published work using CLaMPI should cite [1].
     make install
 ```
 
-### On x86
-```
-    autoreconf -if
-    CC=mpicc ./configure --prefix=$(pwd)/build/ --enable-adaptive --with-liblsb=<liblsb with MPI path>
-    make
-    make install
-```
 
 ### Notes:
-    - libLSB is optional in configure. If not specified, the perf_hash test will not be compiled
-    - --enable-adaptive enables the adaptive scheme
+    - Specifying libLSB is optional in configure. If not specified, the perf_hash test will not be compiled
+    - The flag --enable-adaptive enables the adaptive scheme (see Section III.E of the paper)
 
 ## Window modes:
     - Use CLAMPI_MODE as key of the MPI_Info object.
