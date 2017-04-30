@@ -1,4 +1,4 @@
-# CLaMPI: A caching layer for MPI
+# CLaMPI: a Caching LAyer for MPI
 Authors: Salvatore Di Girolamo, Flavio Vella, Torsten Hoefler
 
 CLaMPI is the framework described by Di Girolamo et al. [1] to enable low-overhead caching of RMA get operations.
