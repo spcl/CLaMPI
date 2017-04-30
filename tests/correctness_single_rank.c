@@ -34,6 +34,9 @@ int main(int argc, char * argv[]){
 
     /* create MPI and CMPI win */
     CMPI_Win cmpi_win;
+    MPI_Info info;
+    MPI_Info_create(&info);
+    MPI_Info_set(info, CLAMPI_MODE, CLAMPI_USER_DEFINED);
 
     CMPI_Win_allocate(win_size, sizeof(int), MPI_INFO_NULL, MPI_COMM_WORLD, &buffer, &cmpi_win); 
         

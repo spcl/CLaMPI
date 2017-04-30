@@ -211,7 +211,7 @@ typedef struct _cl_cache{
     double mms;
     uint32_t getcount;
     cl_entry_t * table_ptr;
-
+    char mode;
     uint32_t * free_entries;
     uint32_t next_free_entry;    
 

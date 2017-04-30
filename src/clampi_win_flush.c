@@ -37,6 +37,12 @@ int CMPI_Win_flush(int rank, CMPI_Win win){
     PEN_PTR(win, cache) = curr+1;
 
     TIMER_STOP(CL_DATA_COPY)
+
+    if (cache->mode == CLAMPI_TRANSPARENT[0]) {
+        CLPRINT("Transparent mode: invalidating\n");
+        CMPI_Win_invalidate(win);
+    }
+
     return res;   
 }
 

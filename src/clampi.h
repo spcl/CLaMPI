@@ -40,6 +40,12 @@
 #define CL_LOOKUP 57
 #define CL_AVL_SEARCH 58
 
+/* Win modes */
+#define CLAMPI_MODE "CLAMPI_MODE"
+#define CLAMPI_TRANSPARENT "1"
+#define CLAMPI_ALWAYS_CACHE "2"
+#define CLAMPI_USER_DEFINED "3"
+
 typedef struct _cl_win{
     MMPI_WIN win;
     void * cache;

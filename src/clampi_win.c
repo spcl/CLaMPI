@@ -4,7 +4,7 @@
 #include "clampi_internal.h"
 #include "utils.h"
 
-int _cl_win_init(CMPI_Win * win, MPI_Comm comm);
+int _cl_win_init(CMPI_Win * win, MPI_Comm comm, MPI_Info info);
 
 
 int free_entry_comp(void * a, void * b){
@@ -33,18 +33,18 @@ int CMPI_Win_allocate(MPI_Aint size, int disp_unit, MPI_Info info, MPI_Comm comm
     MMPI_WIN_ALLOCATE(size, disp_unit, info, comm, baseptr, &win->win);
     //printf("allocated win: %p ->: %p\n", &win->win, win->win);
 
-    return _cl_win_init(win, comm);
+    return _cl_win_init(win, comm, info);
 }
 
 int CMPI_Win_create(void * base, MPI_Aint size, int disp_unit, MPI_Info info, MPI_Comm comm, CMPI_Win * win){
     //printf("clampi: mpi_win_create\n");
     MMPI_WIN_CREATE(base, size, disp_unit, info, comm, &win->win);
     //printf("clampi: mpi_win_create ok\n");
-    return _cl_win_init(win, comm);
+    return _cl_win_init(win, comm, info);
 
 }
 
-int _cl_win_init(CMPI_Win * win, MPI_Comm comm){
+int _cl_win_init(CMPI_Win * win, MPI_Comm comm, MPI_Info info){
     cl_cache_t * cache;
 
     if (!clampi.init){
@@ -53,6 +53,13 @@ int _cl_win_init(CMPI_Win * win, MPI_Comm comm){
     /* cache descriptor */
     ALLOC(sizeof(cl_cache_t), cl_cache_t, win->cache);
     cache = (cl_cache_t *) win->cache;
+
+    /* set win mode */
+    char mode;
+    int flag=0;
+    if (info!=MPI_INFO_NULL) MPI_Info_get(info, CLAMPI_MODE, 1, &mode, &flag);
+    if (!flag || (mode!=CLAMPI_ALWAYS_CACHE && mode!=CLAMPI_USER_DEFINED)) mode = CLAMPI_TRANSPARENT;
+    cache->mode = mode;
 
     /* number of ht entries */
     cache->ht_entries = clampi.htsize;
