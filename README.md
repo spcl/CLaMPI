@@ -32,7 +32,7 @@ All published work using CLaMPI should cite [1].
 
 
 ### Notes:
-    - Specifying libLSB is optional in configure. If not specified, the perf_hash test will not be compiled
+    - Specifying libLSB is optional. If not specified, the perf_hash test will not be compiled
     - The flag --enable-adaptive enables the adaptive scheme (see Section III.E of the paper)
 
 ## Window modes:
