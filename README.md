@@ -9,11 +9,11 @@ All published work using the simulator should cite [1].
 [1] Di Girolamo, Salvatore, Flavio Vella, and Torsten Hoefler. "Transparent Caching for RMA Systems." 
 (https://spcl.inf.ethz.ch/Publications/.pdf/CLaMPI.pdf)
 
-##Compile
-```
-```
+## Compile
 
-###On Piz Daint
+
+
+### On Piz Daint
 ``` 
     module switch PrgEnv-cray PrgEnv-gnu
     export CRAYPE_LINK_TYPE="dynamic"
@@ -22,7 +22,7 @@ All published work using the simulator should cite [1].
     make
     make install
 ```
-###On x86
+### On x86
 ```
     autoreconf -if
     CC=mpicc ./configure --prefix=$(pwd)/build/ --enable-adaptive --with-liblsb=<liblsb with MPI path>
