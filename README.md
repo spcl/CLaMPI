@@ -36,4 +36,4 @@ All published work using the simulator should cite [1].
 
 ## Window modes:
     - Use CLAMPI_MODE as key of the MPI_Info object.
-    - Possible values are CLAMPI_TRANSPARENT, CLAMPI_ALWAYS_CACHE, CLAMPI_USER_DEFINED. Read the paper for their description.
+    - Possible values are CLAMPI_TRANSPARENT, CLAMPI_ALWAYS_CACHE, CLAMPI_USER_DEFINED. See Section III.A of the paper for their description.
