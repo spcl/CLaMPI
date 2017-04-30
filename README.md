@@ -32,5 +32,5 @@ All published work using the simulator should cite [1].
 
 ### Notes:
     - libLSB is optional in configure. If not specified, the perf_hash test will not be compiled
-    - `--enable-adaptive` enables the adaptive scheme
+    - --enable-adaptive enables the adaptive scheme
 
