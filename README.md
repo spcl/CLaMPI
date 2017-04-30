@@ -4,7 +4,7 @@ Authors: Salvatore Di Girolamo, Flavio Vella, Torsten Hoefler
 CLaMPI is the framework described by Di Girolamo et al. [1] to enable low-overhead caching of RMA get operations.
 It is implemented on top of MPI-3 RMA as a proof-of-concept.
 
-All published work using the simulator should cite [1].
+All published work using CLaMPI should cite [1].
 
 [1] Di Girolamo, Salvatore, Flavio Vella, and Torsten Hoefler. "Transparent Caching for RMA Systems." [PDF](https://spcl.inf.ethz.ch/Publications/.pdf/CLaMPI.pdf)
 
