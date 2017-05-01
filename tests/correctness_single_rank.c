@@ -38,7 +38,7 @@ int main(int argc, char * argv[]){
     MPI_Info_create(&info);
     MPI_Info_set(info, CLAMPI_MODE, CLAMPI_USER_DEFINED);
 
-    CMPI_Win_allocate(win_size, sizeof(int), MPI_INFO_NULL, MPI_COMM_WORLD, &buffer, &cmpi_win); 
+    CMPI_Win_allocate(win_size, sizeof(int), info, MPI_COMM_WORLD, &buffer, &cmpi_win); 
         
     for (int i=0; i<num_ints; i++) {
         buffer[i] = rand() % 100;

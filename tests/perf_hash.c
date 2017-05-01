@@ -503,9 +503,12 @@ int main(int argc, char * argv[]){
     // little endian if true
     if(*(char *)&n == 1) { printf("LITTLE ENDIAN\n");}
     else printf("BIG ENDIAN\n");
+    MPI_Info info;
+    MPI_Info_create(&info);
+    MPI_Info_set(info, CLAMPI_MODE, CLAMPI_USER_DEFINED);
 
     //MPICHECK(MPI_Win_create(win_mem, WINSIZE, WINDISPL, MPI_INFO_NULL, MPI_COMM_WORLD, &win));
-    MPICHECK(CMPI_Win_allocate(WINSIZE, WINDISPL, MPI_INFO_NULL, MPI_COMM_WORLD, &win_mem, &win));
+    MPICHECK(CMPI_Win_allocate(WINSIZE, WINDISPL, info, MPI_COMM_WORLD, &win_mem, &win));
 
 
     //MMPI_WIN_FENCE(0, win);   
