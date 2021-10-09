@@ -8,7 +8,9 @@ int _cl_win_init(CMPI_Win * win, MPI_Comm comm, MPI_Info info);
 
 
 int free_entry_comp(void * a, void * b){
-    return ((cl_entry_t *)a)->size - ((cl_entry_t *)b)->size;
+    uint64_t va = ((cl_entry_t *)a)->size;
+    uint64_t vb = ((cl_entry_t *)b)->size;
+    return (va > vb) - (va < vb);
 }
 
 void free_entry_print(void * context, void * a){
@@ -17,7 +19,7 @@ void free_entry_print(void * context, void * a){
 #ifdef CLDEBUG
     printf("entry: ");
     print_neigh(cache, e);
-    printf(" size: %u; type: %i; index: %i; tnode: %p", e->size, e->type, e->index, e->tnode);
+    printf(" size: %lu; type: %i; index: %i; tnode: %p", e->size, e->type, e->index, e->tnode);
 #endif
 }
 
@@ -91,7 +93,7 @@ int _cl_win_init(CMPI_Win * win, MPI_Comm comm, MPI_Info info){
 
     reset_data_structures(cache);
 
-    CLPRINT("init htsize: %i (%i); memsize: %i (%i); \n", clampi.htsize, CL_HT_ENTRIES(cache), clampi.memsize, CL_MEM_SIZE(cache));
+    CLPRINT("init htsize: %i (%i); memsize: %lu (%lu); \n", clampi.htsize, CL_HT_ENTRIES(cache), clampi.memsize, CL_MEM_SIZE(cache));
 
 
     return CL_SUCCESS;

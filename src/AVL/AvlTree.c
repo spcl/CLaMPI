@@ -95,7 +95,7 @@ void Tree_Empty(Tree t){
 //
 Node Tree_Insert (Tree t, void *data) {
     Node newnode;
-
+    //t->print(t->context, data);
     if (t->root == NULL) {
         t->root = Node_New (t, data, NULL);
         return t->root;

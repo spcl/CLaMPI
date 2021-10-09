@@ -9,6 +9,8 @@
 //#include "utils.h"
 #include "../config.h"
 
+#define CLDEBUG
+
 #ifdef CL_BENCH
     #include <liblsb.h>
 #endif
@@ -171,7 +173,7 @@ typedef struct _cl_index{
 typedef struct _cl_entry{
     union{
         cl_get_t get_info; //8
-        uint32_t size;
+        uint64_t size;
     }; 
     /* Why do I need this intermediate struct? 
     Because of the cuckoo hashing: ht entries can be moved and
@@ -186,7 +188,7 @@ typedef struct _cl_entry{
     int32_t mprev;
     int32_t mnext;
 
-    uint32_t offset;
+    uint64_t offset;
     //int size; //4
 
     /* This will be accessed during the flush */
@@ -219,7 +221,7 @@ typedef struct _cl_cache{
     
     uint32_t ht_entries;
 
-    uint32_t mem_size;
+    uint64_t mem_size;
     cl_index_t * table;
 
     uint32_t table_size;
@@ -252,7 +254,7 @@ void free_entry_replace(void * target, void * source);
 typedef struct cl_conf{
     uint8_t init;
     uint32_t htsize; /* Starting HT size */
-    uint32_t memsize; /* Memory buffer size (in bytes) */
+    uint64_t memsize; /* Memory buffer size (in bytes) */
 } cl_conf_t;
 cl_conf_t clampi;
 

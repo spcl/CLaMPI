@@ -71,7 +71,7 @@ int CMPI_Get(void * origin_addr, int origin_count, MPI_Datatype origin_datatype,
     }
     /* Check if we can cache this message */
     if (size>CL_MEM_SIZE(cache)) {
-        CLPRINT("Warning: message too big!\n");
+        CLPRINT("Warning: message too big (message size: %lu; cache size: %lu)!\n", size, CL_MEM_SIZE(cache));
         CLPRINT("-----------------\n\n");
         return CL_NOT_CACHED;
     }

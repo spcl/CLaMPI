@@ -5,6 +5,7 @@
 #include <math.h>
 #include <assert.h>
 #include <time.h>
+#include <limits.h>
 
 #include "clampi.h"
 #include "clampi_internal.h"
@@ -26,8 +27,21 @@ void cl_init(){
 
     clampi.memsize = CL_MEM_SIZE_VAL;
     char * memsize_str = getenv("CL_MEM_SIZE");
-    if (memsize_str!=NULL) clampi.memsize = (uint32_t) atof(memsize_str);
+    if (memsize_str!=NULL) {
+        char * memsize_str_end;
+        int errno = 0;
 
+        clampi.memsize = (uint64_t) strtoull(memsize_str, &memsize_str_end, 10);
+
+         /* str was not a number */
+        assert(clampi.memsize != 0 || memsize_str != memsize_str_end);
+
+        /* the value of str does not fit in unsigned long long */
+        assert(clampi.memsize < ULLONG_MAX || !errno);
+
+        /* str began with a number but has junk left over at the end */
+        assert(!*memsize_str_end);
+    }
 
 #ifdef CLDEBUG
     MPI_Comm_rank(MPI_COMM_WORLD, &dbg_rank);
@@ -38,7 +52,7 @@ void cl_init(){
     printf("CLAMPI: Adaptive scheme enabled!\n");
 #endif
 
-    printf("CLAMPI INIT: mem_size: %i; cache line: %i;  HT entries: %i\n", clampi.memsize, CACHE_LINE, clampi.htsize);
+    printf("CLAMPI INIT: mem_size: %lu; cache line: %i;  HT entries: %i\n", clampi.memsize, CACHE_LINE, clampi.htsize);
 
 #ifdef USE_FOMPI
     printf("CLAMPI: Using foMPI\n");
