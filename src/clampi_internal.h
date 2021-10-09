@@ -9,7 +9,7 @@
 //#include "utils.h"
 #include "../config.h"
 
-#define CLDEBUG
+//#define CLDEBUG
 
 #ifdef CL_BENCH
     #include <liblsb.h>
